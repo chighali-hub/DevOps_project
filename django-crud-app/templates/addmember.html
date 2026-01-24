@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+ {% block content %}
+
+        <section class="page-section" id="services">
+            <div class="container border" style="margin-top:2em">
+                <h2 class='mt-5'>Add Member
+                    <a class='btn btn-primary' style='    float: right;
+    background: #000000;
+    border: none;
+    font-size: 11px;' href='/members'>View Members</a>
+                </h2>
+                <hr>
+               <div class='row'>
+                    <div class='col-md-3'></div>
+                    <div class='col-md-6'>
+                    <div class='container'>
+                       <form method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button class='btn btn-primary' type="submit">Add</button>
+                        </form>
+                    </div></div>
+                    <div class='col-md-3'></div>
+                </div>
+            </div>
+        </section>
+       
+
+{% endblock content %}

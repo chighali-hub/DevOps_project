@@ -1,0 +1,12 @@
+Django>=4.2,<5.0
+djangorestframework
+django-allauth
+python-decouple
+psycopg2-binary
+whitenoise
+django-crispy-forms
+crispy-bootstrap5
+django-storages
+boto3
+gunicorn
+pytest-django

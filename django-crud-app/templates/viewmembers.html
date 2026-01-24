@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+ {% block content %}
+
+        <section class="page-section" id="services">
+            <div class="container border" style="margin-top:2em">
+                <h2 class='mt-5'>Members
+                    <a class='btn btn-primary' style='    float: right;
+    background: #000000;
+    border: none;
+    font-size: 11px;' href='/addmember'>New Member</a>
+                </h2>
+                <hr>
+                <table class='table border'>
+                <th><th>Name</td><th>Email</th><th>Contact</th><th>Address</th><td>Gender</td><th>Photo</th><th>Action</th></tr>
+                {% for member in data %}
+                <th><th> {{ member.name }}</td>
+                    <th> {{ member.email }}</th>
+                    <th> {{ member.contact }}</th>
+                    <th> {{ member.address }}</th>
+                    <td> 
+                        {% if member.gender == "M" %}
+                            Male
+                        {% elif member.gender == "F" %}
+                            Female
+                        {% else %}
+                            Other
+                        {% endif %}
+                    </td>
+                    <th>    {% if member.photo %}
+                                <img src="{{ member.photo.url }}" alt="{{ member.name }}" width="100">
+                            {% else %}
+                                <img src="{% static 'profile-pic.jpg' %}" alt="No Photo" width="100px">
+                            {% endif %}
+                    </th>
+                    <th><a href="{% url 'DeleteMember' member.id %}" onclick="return confirm('Are you sure you want to delete this member?');">Delete</a>
+                    <a href="{% url 'Editmember' member.id %}">Edit</a>
+                    </th>
+                </tr>
+               
+                {% endfor %}
+                </table>
+            </div>
+        </section>
+       
+
+{% endblock content %}
