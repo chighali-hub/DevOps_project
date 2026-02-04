@@ -42,9 +42,10 @@ pipeline {
                 dir('django-crud-app') {
                     echo 'Running SonarQube Analysis...'
                     withSonarQubeEnv('SonarQube') {
-                         // L'URL de Sonar doit être configurée comme http://sonarqube:9000 dans Jenkins
-                         // Le token est injecté automatiquement par withSonarQubeEnv
-                        sh 'sonar-scanner'
+                         // On force l'injection du token via 'sonar.login' pour être sûr
+                         withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
+                            sh 'sonar-scanner -Dsonar.login=${SONAR_TOKEN}'
+                         }
                     }
                 }
             }
@@ -78,7 +79,7 @@ pipeline {
                 
                 sh """
                 docker run -d --name ${CONTAINER_NAME} \
-                --network infra_devops-net \
+                --network devops_project_devops-net \
                 -p 8000:8000 \
                 ${IMAGE_NAME}:latest
                 """
