@@ -35,7 +35,7 @@ pipeline {
             agent {
                 docker {
                     image 'sonarsource/sonar-scanner-cli:latest'
-                    args '--network infra_devops-net' // Connect to SonarQube network
+                    args '--network devops_project_devops-net' // Connect to SonarQube network
                 }
             }
             steps {
